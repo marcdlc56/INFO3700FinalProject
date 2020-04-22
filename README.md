@@ -14,7 +14,7 @@ VADER sentiment score. We also found that the sentiment of the nes involving cor
 but there were some trends in the early days in February. 
 
 
-#Start to end of Project# 
+###Start to end of Project###
 1. To start the project run webscraper.py, this will import a list of articles from htmlist.py, 
 This script will also provide a csv of the text of each article and the date associated with the article, (as a note, we weren't
 able to programmatically get the publish date for each article without running into a lot of formatting issues, and about 50 if statements, 
@@ -36,7 +36,8 @@ we found that using a pivottable for the csv's was the best/quickest way we knew
 on the x-axis without taking out data, so we left it in, but it left a pretty big image, so you'll need to zoom in quite a bit 
 to see the dates, but the trends are clearly visible. To replot them run words_over_time_plot.py, mostPopularWords.py, and specificwordsovertime.py. 
 
-#Tweets# 
+###Tweets###
+
 Process is the same framework as the articles above, we scraped originally 300,000 tweets using GetOldTweets3, but we truncated
 that down to about 50 tweets per day which is roughly 4,000 cells. 
 The script order for tweets goes. 
