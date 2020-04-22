@@ -41,7 +41,11 @@ to see the dates, but the trends are clearly visible. To replot them run words_o
 Process is the same framework as the articles above, we scraped originally 300,000 tweets using GetOldTweets3, but we truncated
 that down to about 50 tweets per day which is roughly 4,000 cells. 
 The script order for tweets goes. 
+
 GetOldTweets.py
+
 processTweets.py
+
 tweetSentiment.py
+
 plotTweets.py
