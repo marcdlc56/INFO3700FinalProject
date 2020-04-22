@@ -26,7 +26,7 @@ data = pd.read_csv('cleanedTweets.csv', sep=',', encoding='utf-8')
 
 # for i in range(len(data))
 for i in range(len(data)):
-    dataAfterLemmaFilter = []
+    lemmatizedData = []
     cleantweetvar = data.loc[i, "CleanedTweets"]
     tweetdatevar = data.loc[i, "TweetTime"]
     doc = nlp(cleantweetvar)
@@ -34,11 +34,11 @@ for i in range(len(data)):
     tweetdatevar = tweetdatevar[:10]
     if cleantweetvar != '':
         for token in doc:
-            dataAfterLemmaFilter.append(token.lemma_)
+            lemmatizedData.append(token.lemma_)
 
         removelist = ['[', ']', '\'', ',']
         cleanlist = []
-        for item in dataAfterLemmaFilter:
+        for item in lemmatizedData:
             if item not in removelist:
                 cleanlist.append(item)
 
@@ -56,6 +56,5 @@ for i in range(len(data)):
         tweetsentimentlist = []
         tweetdatelist = []
         cleanlist = []
-
 
 finaldf.to_csv('tweetSentimentOverTime.csv', sep=',', encoding='utf-8')

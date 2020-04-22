@@ -1,9 +1,7 @@
 import pandas as pd
 from matplotlib import pyplot as plt
 
-
 passengerdata = pd.read_csv('passenger_over_time.csv', sep=',', encoding='utf-8')
-
 
 
 x = passengerdata['PublishDate']
@@ -11,8 +9,6 @@ x = passengerdata['PublishDate']
 y = passengerdata['WordCount']
 
 plt.plot(x,y)
-
-
 
 plt.ylabel('WordCount')
 
@@ -34,4 +30,3 @@ plt.ylabel('WordCount')
 plt.title('\'Ship\' Over Time')
 
 shipplot = plt.show()
-

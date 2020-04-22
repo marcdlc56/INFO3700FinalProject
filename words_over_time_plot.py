@@ -10,4 +10,3 @@ X = data["WordCount"]
 Y = data["PublishDate"]
 
 graph = plt.plot(X,Y)
-

@@ -14,7 +14,6 @@ data = data.rename(columns={"04/20/2020 21:04": "TweetTime", "Just across Dutch 
 finaldf = pd.DataFrame(columns=["Tweet", "TweetTime", "CleanedTweets", "CommonWords"])
 sampledata = data.head()
 
-
 #
 # # for i in range(len(data))
 
@@ -23,31 +22,31 @@ for i in range(len(data)):
     tweetvar = data.loc[i, "Tweet"]
     tweetdatevar = data.loc[i, "TweetTime"]
 
-    dataAfterLemmaFilter = []
-    dataAfterPronounFilter = []
-    dataAfterStopwords = []
-    dataAfterPunctuations = []
+    lemmatizedData = []
+    pronounFilter = []
+    stopwordFilter = []
+    punctuationFilter = []
     dataAfterNounFilter = []
 
     doc = nlp(str(tweetvar))
 
     for token in doc:
-        dataAfterLemmaFilter.append(token.lemma_)
+        lemmatizedData.append(token.lemma_)
 
-    for token in dataAfterLemmaFilter:
+    for token in lemmatizedData:
         if token != "-PRON-":
-            dataAfterPronounFilter.append(token.lower().strip())
+            pronounFilter.append(token.lower().strip())
 
     stopwords = list(STOP_WORDS)
 
-    for token in dataAfterPronounFilter:
+    for token in pronounFilter:
         if token != stopwords:
-            dataAfterStopwords.append(token)
+            stopwordFilter.append(token)
 
     #custom_remove_list = ['our', 'live', 'coverage', 'of', 'the', 'has', 'moved', 'here', '\\n']
 
     # dataAfterCustomStopWords = []
-    # for word in dataAfterStopwords:
+    # for word in stopwordFilter:
     #     if word not in custom_remove_list:
     #         dataAfterCustomStopWords.append(word)
 
@@ -61,11 +60,11 @@ for i in range(len(data)):
     punctuations = ['@', '#', '$', '%', '&', '*', '(', ')', '_', '+', '~', '`',
                     '=', '<', '>', '/', '?', '\\', ]
 
-    for token in dataAfterStopwords:
+    for token in stopwordFilter:
         if token not in punctuations:
-            dataAfterPunctuations.append(token)
+            punctuationFilter.append(token)
 
-    for value in dataAfterPunctuations:
+    for value in punctuationFilter:
         td = nlp(value)
         for t in td:
             if t.pos_ == 'NOUN':

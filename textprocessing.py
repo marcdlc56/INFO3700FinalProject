@@ -15,36 +15,35 @@ mostcommonwordsdf = pd.DataFrame(columns=["Words", "Values", "PublishDate"])
 finalworddf = pd.DataFrame(columns=["Words", "WordCount", "PublishDate"])
 
 
-#for i in range(len(df)):
-for i in range(10):
+for i in range(len(df)):
     articletextvar = df.loc[i, "ArticleText"]
     publishdatevar = df.loc[i, "PublishDate"]
 
-    dataAfterLemmaFilter = []
-    dataAfterPronounFilter = []
-    dataAfterStopwords = []
-    dataAfterPunctuations = []
+    lemmatizedData = []
+    pronounFilterData = []
+    stopWordsFilter = []
+    punctuationFilter = []
     dataAfterNounFilter = []
 
     doc = nlp(str(articletextvar))
 
     for token in doc:
-        dataAfterLemmaFilter.append(token.lemma_)
+        lemmatizedData.append(token.lemma_)
 
-    for token in dataAfterLemmaFilter:
+    for token in lemmatizedData:
         if token != "-PRON-":
-            dataAfterPronounFilter.append(token.lower().strip())
+            pronounFilterData.append(token.lower().strip())
 
     stopwords = list(STOP_WORDS)
 
-    for token in dataAfterPronounFilter:
+    for token in pronounFilterData:
         if token != stopwords:
-            dataAfterStopwords.append(token)
+            stopWordsFilter.append(token)
 
     custom_remove_list = ['our', 'live', 'coverage', 'of', 'the', 'has', 'moved', 'here', '\\n']
 
     dataAfterCustomStopWords = []
-    for word in dataAfterStopwords:
+    for word in stopWordsFilter:
         if word not in custom_remove_list:
             dataAfterCustomStopWords.append(word)
 
@@ -60,9 +59,9 @@ for i in range(10):
 
     for token in dataAfterRemoveCoverage:
         if token not in punctuations:
-            dataAfterPunctuations.append(token)
+            punctuationFilter.append(token)
 
-    for value in dataAfterPunctuations:
+    for value in punctuationFilter:
         td = nlp(value)
         for t in td:
             if t.pos_ == 'NOUN':
@@ -112,6 +111,6 @@ for i in range(10):
     finalworddf = finalworddf.append(worddf, ignore_index=True)
 
 
-#finaldf.to_csv('tokenized_words_with_wordcount.csv', sep='\t', encoding='utf-8')
+finaldf.to_csv('tokenized_words_with_wordcount.csv', sep='\t', encoding='utf-8')
 
-#finalworddf.to_csv('words_with_wordcount_and_publishdate.csv', sep='\t', encoding='utf-8')
+finalworddf.to_csv('words_with_wordcount_and_publishdate.csv', sep='\t', encoding='utf-8')

@@ -37,6 +37,4 @@ for article in coronaList:
     articletime = articletime + pd.DateOffset(days=1)
 
 
-#df.to_csv('SummaryandPublishDate.csv', sep='\t', encoding='utf-8')
-
-print('Done')
+df.to_csv('SummaryandPublishDate.csv', sep='\t', encoding='utf-8')
